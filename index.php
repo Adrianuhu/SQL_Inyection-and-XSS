@@ -13,14 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user']) && $_POST['use
     mysqli_set_charset($connection, "utf8");
     
     $user = $_POST['user'];
+    // Securice
+    $user=mysqli_real_escape_string($connection, $user);
     $query=mysqli_query($connection, "SELECT name, description FROM users WHERE name like '$user'");
     if (mysqli_num_rows($query) > 0 ) {
         $ins = mysqli_fetch_all($query, MYSQLI_ASSOC)[0];
         $dbValue = $ins['name'] . $ins['description'];
-        $dbValueProtected=mysqli_real_escape_string($connection, $dbValue);
     }else {
         $dbValue = "ERROR";
-        $dbValueProtected = "ERROR";
     }
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['script']) && $_POST['script'] != "") {    
@@ -57,8 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['scriptFunction']) && $
         <p>SQL Inyection: <span style="background-color:yellow"> ' or ''=' </span></p>
         <input type="text" name="user" id="user" placeholder="user">
         <input type="submit" value="GO">
-        <p id="dbValue">Result without protection: <?=$dbValue?></p>
-        <p id="dbValue">Result with protection: <?=$dbValueProtected?></p>
+        <p id="dbValue">Result: <?=$dbValue?></p>
         <hr>
         <!-- Cross Site Scripting -->
         <p>Cross Site Scripting</p>
