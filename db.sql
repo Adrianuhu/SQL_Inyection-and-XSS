@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2021 a las 14:53:09
+-- Tiempo de generación: 19-05-2021 a las 17:25:04
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -30,16 +30,28 @@ USE `hackme`;
 --
 
 CREATE TABLE `users` (
-  `name` varchar(255) NOT NULL
+  `name` varchar(10) NOT NULL,
+  `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`name`) VALUES
-('user1'),
-('user2');
+INSERT INTO `users` (`name`, `description`) VALUES
+('user1', 'ok'),
+('user2', '<script>console.log(\"dungeon master\")</script>'),
+('user3', '<script>alert(\"pwned\")</script>');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`name`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
