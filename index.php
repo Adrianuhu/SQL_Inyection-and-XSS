@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user']) && $_POST['use
     
     $user = $_POST['user'];
     // Securice
-    $user=mysqli_real_escape_string($connection, $user);
+    // $user=mysqli_real_escape_string($connection, $user);
     $query=mysqli_query($connection, "SELECT name, description FROM users WHERE name like '$user'");
     if (mysqli_num_rows($query) > 0 ) {
         $ins = mysqli_fetch_all($query, MYSQLI_ASSOC)[0];
